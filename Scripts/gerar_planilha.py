@@ -8,7 +8,8 @@ os.makedirs("../logs", exist_ok=True)
 
 data = {
     "Gabriel": {
-        "Email": "gabriellobato315@gmail.com",
+        #adicione o email que irá receber a mensagem sobre as notas
+        "Email": "gabriel@email.com",
         "Notas": {
             "Matematica": 10,
             "Portugues": 8,
