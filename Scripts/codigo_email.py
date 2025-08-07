@@ -11,7 +11,8 @@ df = pd.read_excel(arquivo_excel)
 
 # Simulando base de e-mails por nome
 emails = {
-    "Gabriel": "gabriellobato315@gmail.com",
+    #Troque pelo email que você deseja receber a mensagem sobre o boletim
+    "Gabriel": "gabriel@email.com",
     "Ana": "ana@email.com",
     "Jorge Willem": "jorgewillem@email.com"
 }
