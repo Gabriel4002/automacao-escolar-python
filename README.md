@@ -41,7 +41,7 @@ source .venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 ```
 
-4.Edite o arquivo `.env.example` colocando o seu email e a sua senha de acesso
+4.Edite o arquivo `.env.example` colocando o seu email e a sua senha de acesso e renomeie o arquivo para `.env`
 
 5. Execute os scripts:
 ```bash
