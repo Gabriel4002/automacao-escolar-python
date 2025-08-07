@@ -1,47 +1,76 @@
-# 🤖 Projeto de Automação de E-mails com Python
+# 📨 Automação Escolar com Python
 
-Este projeto tem como objetivo automatizar o envio de e-mails personalizados para diferentes destinatários com base em dados extraídos de uma planilha Excel. Foi desenvolvido como parte do meu aprendizado em automação com Python.
+Automação simples e funcional para envio de boletins escolares via e-mail, com geração, conversão e análise de planilhas usando Python.
 
----
+## 🔧 Funcionalidades
+- Geração de planilha com dados fictícios de alunos (`.xlsx`)
+- Leitura de planilhas existentes
+- Conversão automática para `.csv`
+- Envio de e-mails com os boletins individuais
+- Registro de logs de envio
+- (Em breve) Análise de dados com Pandas
 
-## 📌 Funcionalidades
+## 📁 Estrutura do Projeto
+```
+automacao-escolar-python/
+├── planilha/              # Arquivo com os dados dos alunos
+├── logs/                  # Logs de envio
+├── Scripts/               # Scripts principais
+├── README.md              # Este arquivo
+├── requirements.txt       # Bibliotecas necessárias
+└── .gitignore             # Ignorar arquivos temporários
+```
 
-- 📊 Geração de planilha com notas por aluno usando `openpyxl`
-- 🧠 Cálculo automático da média por aluno
-- ✉️ Envio de e-mails personalizados com `smtplib` e `email.message`
-- 🔐 Proteção de dados sensíveis com `.env` e `python-dotenv`
-- 🗂️ Organização modular do código e Registro completo dos envios em um arquivo `logs/envios_log.txt`
-- ✅ Inclusão dos scripts usados durante o processo de aprendizagem
-  
+## ▶️ Como executar
 
-
----
-
-## 🧪 Tecnologias utilizadas
-
-- Python 3.13.5
-- [openpyxl](https://openpyxl.readthedocs.io/en/stable/)
-- [python-dotenv](https://pypi.org/project/python-dotenv/)
-- smtplib / email.message (bibliotecas padrão)
-
----
-
-## 📁 Estrutura do projeto
-
+1. Clone o repositório:
 ```bash
-projeto-automacao-email/
-├── codigo_email.py               # Script principal: cria planilha e envia e-mails
-├── codigo_envio_email.py          # Função para envio de e-mails via SMTP
-├── planilha/
-│   └── notas_alunos.xlsx    # Planilha gerada automaticamente
-├── exemplos_aprendizado/    # Scripts e testes durante o estudo
-│   └── base.py
-    └── ex01.py
-    └── ex02.py
-    └── ex03.py
-    └── final_ex.py
-├── logs/    # Scripts e testes durante o estudo
-│   └── envios_log.txt
-├── .env                     # Variáveis de ambiente (NÃO subir no GitHub)
-├── .gitignore
-└── README.md
+git clone https://github.com/Gabriel4002/automacao-escolar-python.git
+cd automacao-escolar-python
+```
+
+2. Crie um ambiente virtual (opcional, mas recomendado):
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+.venv\Scripts\activate   # Windows
+```
+
+3. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+4. Execute os scripts:
+```bash
+# Gerar planilha
+python Scripts/gerar_planilha.py
+
+# Enviar e-mails
+python Scripts/codigo_email.py
+
+# Converter para CSV
+python Scripts/converter_para_csv.py
+```
+
+## 💼 Tecnologias utilizadas
+
+- Python 3.13+
+- `pandas`
+- `openpyxl`
+- `smtplib` e `email`
+- `os`, `datetime`
+
+## 📌 Requisitos
+
+- Conta de e-mail (Gmail, Outlook, etc.)
+- Planilha `.xlsx` formatada corretamente
+
+## ✍️ Autor
+
+Gabriel Lobato  
+[LinkedIn](https://www.linkedin.com/in/gabriel-lobato-314096371)
+
+---
+
+> Projeto criado como parte do meu aprendizado em automação com Python, envio de e-mails e análise de dados.
