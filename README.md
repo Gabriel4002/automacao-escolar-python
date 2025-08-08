@@ -41,7 +41,15 @@ source .venv/bin/activate  # Linux/macOS
 pip install -r requirements.txt
 ```
 
-4.Edite o arquivo `.env.example` colocando o seu email e a sua senha de acesso e renomeie o arquivo para `.env`
+4️. Configurar as variáveis de ambiente
+- Copie o arquivo `.env.example` para `.env` (caso exista) ou crie um novo `.env`.
+- Preencha com seu e‑mail e senha de aplicativo (ou outra conta SMTP válida):
+
+```env
+EMAIL=seuemail@gmail.com
+SENHA=sua_senha_de_app
+```
+> ⚠️ Importante: use senha de aplicativo no Gmail ou configuração equivalente em outros provedores.
 
 5. Execute os scripts:
 ```bash
@@ -67,6 +75,7 @@ python Scripts/converter_para_csv.py
 
 - Conta de e-mail (Gmail, Outlook, etc.)
 - Planilha `.xlsx` formatada corretamente
+- Caso use Gmail, ative a autenticação em dois fatores e gere uma senha de app.
 
 ## ✍️ Autor
 
