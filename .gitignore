@@ -10,3 +10,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*venv
+envio_log.txt
+envio_logs.txt
+envios_log.txt

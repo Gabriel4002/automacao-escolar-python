@@ -5,7 +5,7 @@ Automação simples e funcional para envio de boletins escolares via e-mail, com
 ## 🔧 Funcionalidades
 - Geração de planilha com dados fictícios de alunos (`.xlsx`)
 - Leitura de planilhas existentes
-- Conversão automática para `.csv`
+- Conversão automática para `.csv` e organização na pasta `dataset`
 - Envio de e-mails com os boletins individuais
 - Registro de logs de envio
 - (Em breve) Análise de dados com Pandas
@@ -13,7 +13,10 @@ Automação simples e funcional para envio de boletins escolares via e-mail, com
 ## 📁 Estrutura do Projeto
 ```
 automacao-escolar-python/
-├── planilha/              # Arquivo com os dados dos alunos
+├── planilha/   
+├── analise_dados/
+│ └── dataset/             # Arquivo com os dados dos alunos
+│ └── scripts/             # Arquivo com os códigos de analise de dados
 ├── logs/                  # Logs de envio
 ├── Scripts/               # Scripts principais
 ├── README.md              # Este arquivo
@@ -61,6 +64,9 @@ python Scripts/codigo_email.py
 
 # Converter para CSV
 python Scripts/converter_para_csv.py
+
+# Analisar os dados do CSV
+python analise_dados_pandas/scripts/analise_dados.py
 ```
 
 ## 💼 Tecnologias utilizadas
