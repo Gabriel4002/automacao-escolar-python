@@ -8,7 +8,12 @@ Automação simples e funcional para envio de boletins escolares via e-mail, com
 - Conversão automática para `.csv` e organização na pasta `dataset`
 - Envio de e-mails com os boletins individuais
 - Registro de logs de envio
-- (Em breve) Análise de dados com Pandas
+
+## 📊 Análise de Dados  
+- Gera estatísticas descritivas (média, desvio padrão).  
+- Classifica alunos em **Aprovados/Reprovados**.  
+- Exporta resultados para `notas_analise.csv`.  
+- **Técnicas usadas**: Pandas, lambda functions, filtros.  
 
 ## 📁 Estrutura do Projeto
 ```
