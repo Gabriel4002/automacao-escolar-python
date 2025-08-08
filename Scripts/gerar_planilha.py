@@ -5,6 +5,7 @@ import os
 
 #Checa se o diretório existe
 os.makedirs("../logs", exist_ok=True)
+os.makedirs("../planilha", exist_ok=True)
 
 #Dados que serão adicionados na planilha
 data = {

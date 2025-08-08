@@ -8,9 +8,10 @@ import os
 os.makedirs("../logs", exist_ok=True)
 
 # Caminho da planilha já existente
-arquivo_excel = '../planilha/notas_alunos.xlsx'
+script_dir = os.path.dirname(os.path.realpath(__file__))
+caminho_arquivo = os.path.join(script_dir, '..', 'planilha', 'notas_alunos.xlsx')
 #Função que le o arquivo excel
-df = pd.read_excel(arquivo_excel)
+df = pd.read_excel(caminho_arquivo)
 
 # Simulando base de e-mails por nome
 emails = {

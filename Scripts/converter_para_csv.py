@@ -3,20 +3,21 @@ import os
 import shutil
 
 # Caminho corrigido com raw string
-arquivo_excel = '../planilha/notas_alunos.xlsx'
+script_dir = os.path.dirname(os.path.realpath(__file__))
+caminho_arquivo = os.path.join(script_dir, '..', 'planilha', 'notas_alunos.xlsx')
 
-if not os.path.exists(arquivo_excel):
-    print(f"Arquivo Excel não encontrado: {arquivo_excel}")
+if not os.path.exists(caminho_arquivo):
+    print(f"Arquivo Excel não encontrado: {caminho_arquivo}")
     exit()
 
 # Lê a planilha existente (não cria mais)
-df = pd.read_excel(arquivo_excel)
+df = pd.read_excel(caminho_arquivo)
 
 # Exibe as 5 primeiras linhas no console
 print(df.head())
 
 # Converte para CSV com mesmo nome
-arquivo_csv = os.path.splitext(arquivo_excel)[0] + '.csv'
+arquivo_csv = os.path.splitext(caminho_arquivo)[0] + '.csv'
 df.to_csv(arquivo_csv, index=False, encoding='utf-8-sig')
 
 print(f'Arquivo convertido com sucesso para: {arquivo_csv}')
