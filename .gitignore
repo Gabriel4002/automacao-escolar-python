@@ -2,8 +2,6 @@
 .env
 .vscode/
 .idea/
-*.xlsx
-*.csv
 *.rar
 *.zip
 __pycache__/
@@ -11,6 +9,3 @@ __pycache__/
 *.pyo
 *.pyd
 *venv
-envio_log.txt
-envio_logs.txt
-envios_log.txt
