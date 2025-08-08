@@ -1,3 +1,5 @@
+#Este código possui a mesma base do código presente no arquivo "gerar_planilha.py", porem ao inves de cria uma planilha, ele le a planilha ja existente
+
 import pandas as pd
 from codigo_envio_email import enviar_email
 from datetime import datetime
@@ -6,7 +8,8 @@ import os
 os.makedirs("../logs", exist_ok=True)
 
 # Caminho da planilha já existente
-arquivo_excel = r'C:\projeto-automacao-email\python-automacao-email\planilha\notas_alunos.xlsx'
+arquivo_excel = r'..\planilha\notas_alunos.xlsx'
+#Função que le o arquivo excel
 df = pd.read_excel(arquivo_excel)
 
 # Simulando base de e-mails por nome
@@ -16,7 +19,7 @@ emails = {
     "Ana": "ana@email.com",
     "Jorge Willem": "jorgewillem@email.com"
 }
-
+#Loop que exibe o corpo da mensagem que sera enviada para o aluno
 for _, row in df.iterrows():
     aluno = row["Nome"]
     notas = row.drop("Nome")
