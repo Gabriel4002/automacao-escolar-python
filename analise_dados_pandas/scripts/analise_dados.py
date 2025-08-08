@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+os.makedirs("../datasets", exist_ok=True)
 def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
     caminho_arquivo = os.path.join(script_dir, '..', 'datasets', 'notas_alunos.csv')
