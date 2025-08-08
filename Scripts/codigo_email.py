@@ -8,7 +8,7 @@ import os
 os.makedirs("../logs", exist_ok=True)
 
 # Caminho da planilha já existente
-arquivo_excel = r'..\planilha\notas_alunos.xlsx'
+arquivo_excel = '../planilha/notas_alunos.xlsx'
 #Função que le o arquivo excel
 df = pd.read_excel(arquivo_excel)
 
