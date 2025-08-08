@@ -1,12 +1,14 @@
 import pandas as pd
+import os
 
 def main():
-    dataset_path = '../datasets/notas_alunos.csv'
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    caminho_arquivo = os.path.join(script_dir, '..', 'datasets', 'notas_alunos.csv')
     #Checa se o arquivo "notas_alunos.csv" existe
     try:
-        df = pd.read_csv(dataset_path)
+        df = pd.read_csv(caminho_arquivo)
     except FileNotFoundError:
-        print(f"Arquivo não encontrado: {dataset_path}")
+        print(f"Arquivo não encontrado: {caminho_arquivo}")
         return
 
     #Exibe as 5 primeiras linhas da planilha
