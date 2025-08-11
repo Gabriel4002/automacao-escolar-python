@@ -15,6 +15,7 @@ df = pd.read_excel(caminho_arquivo)
 
 # Exibe as 5 primeiras linhas no console
 print(df.head())
+print("\n ...")
 
 # Converte para CSV com mesmo nome
 arquivo_csv = os.path.splitext(caminho_arquivo)[0] + '.csv'

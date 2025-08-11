@@ -1,19 +1,17 @@
 from openpyxl import Workbook
-from codigo_envio_email import enviar_email
 from datetime import datetime
 import os
 
-#Checa se o diretório existe
+# Checa se os diretórios existem
 os.makedirs("../logs", exist_ok=True)
 os.makedirs("../planilha", exist_ok=True)
 
-#Dados que serão adicionados na planilha
+# Dados dos alunos
 data = {
     "Gabriel": {
-        #adicione o email que irá receber a mensagem sobre as notas
         "Email": "gabriel@email.com",
         "Notas": {
-            "Matematica": 10,
+            "Matematica": 5,
             "Portugues": 8,
             "Historia": 6,
             "Geografia": 1
@@ -31,49 +29,98 @@ data = {
     "Jorge Willem": {
         "Email": "jorgewillem@email.com",
         "Notas": {
-            "Matematica": 9,
+            "Matematica": 1,
             "Portugues": 4,
             "Historia": 2,
+            "Geografia": 8
+        }
+    },
+    "Mariana Souza": {
+        "Email": "mariana.souza@email.com",
+        "Notas": {
+            "Matematica": 7,
+            "Portugues": 9,
+            "Historia": 6,
+            "Geografia": 8
+        }
+    },
+    "Lucas Ferreira": {
+        "Email": "lucas.ferreira@email.com",
+        "Notas": {
+            "Matematica": 3,
+            "Portugues": 5,
+            "Historia": 4,
+            "Geografia": 2
+        }
+    },
+    "Beatriz Lima": {
+        "Email": "beatriz.lima@email.com",
+        "Notas": {
+            "Matematica": 9,
+            "Portugues": 7,
+            "Historia": 8,
+            "Geografia": 9
+        }
+    },
+    "Ricardo Alves": {
+        "Email": "ricardo.alves@email.com",
+        "Notas": {
+            "Matematica": 6,
+            "Portugues": 6,
+            "Historia": 5,
+            "Geografia": 6
+        }
+    },
+    "Larissa Martins": {
+        "Email": "larissa.martins@email.com",
+        "Notas": {
+            "Matematica": 2,
+            "Portugues": 3,
+            "Historia": 1,
+            "Geografia": 4
+        }
+    },
+    "Fernando Costa": {
+        "Email": "fernando.costa@email.com",
+        "Notas": {
+            "Matematica": 10,
+            "Portugues": 9,
+            "Historia": 9,
             "Geografia": 10
+        }
+    },
+    "Juliana Rocha": {
+        "Email": "juliana.rocha@email.com",
+        "Notas": {
+            "Matematica": 4,
+            "Portugues": 6,
+            "Historia": 5,
+            "Geografia": 7
         }
     }
 }
 
-#Funções referentes ao openpyxl. WB cria uma pasta de trabalho; WS infoma que será usada a planilha ativa desta pasta de trabalho e WS.title insere o titulo desta planilha
+# Criação da planilha
 wb = Workbook()
 ws = wb.active
 ws.title = "Notas dos Alunos"
 
-#Define que 'headings' sera as informações que existem após estas referencias
-headings = ["Nome"] + list(data["Gabriel"]["Notas"].keys())
+# Cabeçalhos (colunas)
+headings = ["Nome"] + list(data["Gabriel"]["Notas"].keys()) + ["Média"]
 ws.append(headings)
 
-#Cria um loop que primeiramente imprime na planilha as informações do aluno
+# Processa e adiciona os dados de cada aluno na planilha
 for aluno, dados in data.items():
     notas = dados["Notas"]
-    linha_planilha = [aluno] + list(notas.values())
+    valores_notas = list(notas.values())
+    media = sum(valores_notas) / len(valores_notas)
+
+    linha_planilha = [aluno] + valores_notas + [round(media, 2)]
     ws.append(linha_planilha)
-#Cria o corpo da mensagem que será enviada por email para o aluno e calcula a média dele
-    corpo = f"Olá {aluno},\n\nAqui estão suas notas:\n"
-    total = 0
-    for materia, nota in notas.items():
-        corpo += f"{materia}: {nota}\n"
-        total += nota
-    media = total / len(notas)
-    corpo += f"\nMédia: {media:.2f}\n\nAtenciosamente,\nSecretaria Escolar"
 
-    email_destino = dados["Email"]
-#Envia o email para o aluno e cria um log que exibe quando a mensagem foi enviada e se ela foi realmente enviada ou não
-    try:
-        enviar_email(email_destino, "Boletim Escolar", corpo)
-        print(f"E-mail enviado para {aluno}")
+    # Apenas printa no terminal que foi processado
+    print(f"Notas do aluno {aluno} processadas.")
 
-        with open("../logs/envios_log.txt", "a", encoding="utf-8") as f:
-            f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M')}] {aluno} - {email_destino} - ENVIADO\n")
-
-    except Exception as e:
-        print(f"Erro ao enviar para {aluno}: {e}")
-        with open("logs/envios_log.txt", "a", encoding="utf-8") as f:
-            f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M')}] {aluno} - {email_destino} - FALHA: {e}\n")
-#Salva a planilha na pasta de destino com o seguinte nome
+# Salva a planilha
 wb.save("../planilha/notas_alunos.xlsx")
+print("\nPlanilha salva com sucesso em '../planilha/notas_alunos.xlsx'")
