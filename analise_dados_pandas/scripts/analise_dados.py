@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from datetime import datetime
-from config import COLUNAS_NOTA, MEDIA_APROVACAO, DIRETORIO_SAIDA, DIRETORIO_LOGS, RECUPERACAO_MIN, RECUPERACAO_MAX
+from config.config import COLUNAS_NOTA, MEDIA_APROVACAO, DIRETORIO_SAIDA, DIRETORIO_LOGS, RECUPERACAO_MIN, RECUPERACAO_MAX
 
 def registrar_erro(mensagem):
     log_dir = os.path.join( '..', DIRETORIO_LOGS)
