@@ -24,7 +24,7 @@ df.to_csv(arquivo_csv, index=False, encoding='utf-8-sig')
 print(f'Arquivo convertido com sucesso para: {arquivo_csv}')
 
 # Caminho da pasta destino (dataset)
-pasta_destino = '../analise_dados_pandas/datasets'
+pasta_destino = 'analise_dados_pandas/datasets'
 
 # Cria a pasta se não existir
 os.makedirs(pasta_destino, exist_ok=True)

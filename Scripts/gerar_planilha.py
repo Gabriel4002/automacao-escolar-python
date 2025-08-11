@@ -122,5 +122,5 @@ for aluno, dados in data.items():
     print(f"Notas do aluno {aluno} processadas.")
 
 # Salva a planilha
-wb.save("../planilha/notas_alunos.xlsx")
+wb.save("planilha/notas_alunos.xlsx")
 print("\nPlanilha salva com sucesso em '../planilha/notas_alunos.xlsx'")
