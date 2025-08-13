@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 from datetime import datetime
-from config.config import COLUNAS_NOTA, MEDIA_APROVACAO, DIRETORIO_SAIDA, DIRETORIO_LOGS, RECUPERACAO_MIN, RECUPERACAO_MAX
+from config.config import *
 
 def registrar_erro(mensagem):
     log_dir = os.path.join( '..', DIRETORIO_LOGS)
@@ -210,7 +210,9 @@ def main():
             return
 
         mostrar_analise(df)
+        print("\nCriando gráficos para melhor vizualização 📊\n")
         gerar_visualizacoes(df, output_dir)
+        print(f"Gráficos gerados, eles podem ser acessados em: {output_dir} como 'desempenho.png' e 'distribuicao.png'")
 
         output_path = os.path.join(output_dir, 'analise_completa.csv')
         print("\n" + exportar_resultados(df, output_path))
