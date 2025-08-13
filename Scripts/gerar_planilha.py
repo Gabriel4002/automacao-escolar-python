@@ -36,7 +36,7 @@ data = {
         }
     },
     "Mariana Souza": {
-        "Email": "mariana.souza@email.com",
+        "Email": "marianasouza@email.com",
         "Notas": {
             "Matematica": 7,
             "Portugues": 9,
@@ -106,7 +106,7 @@ ws = wb.active
 ws.title = "Notas dos Alunos"
 
 # Cabeçalhos (colunas)
-headings = ["Nome"] + list(data["Gabriel"]["Notas"].keys()) + ["Média"]
+headings = ["Nome"] + list(data["Gabriel"]["Notas"].keys()) + ["Média", "Email"]
 ws.append(headings)
 
 # Processa e adiciona os dados de cada aluno na planilha
@@ -114,9 +114,17 @@ for aluno, dados in data.items():
     notas = dados["Notas"]
     valores_notas = list(notas.values())
     media = sum(valores_notas) / len(valores_notas)
+    email = dados["Email"]
 
-    linha_planilha = [aluno] + valores_notas + [round(media, 2)]
-    ws.append(linha_planilha)
+    linha_planilha = [aluno] + valores_notas + [round(media, 2)] + [email]
+    try:
+        ws.append(linha_planilha)
+        with open("../logs/planilha_logs.txt", "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M')}] {aluno} - Dados adicionados a planilha - SUCESSO\n")
+    except Exception as e:
+        print(f"Erro ao criar planilha: {e}")
+        with open("logs/planilha_logs.txt", "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M')}] {aluno} - Dados não adicionados a planilha - FALHA: {e}\n")
 
     # Apenas printa no terminal que foi processado
     print(f"Notas do aluno {aluno} processadas.")
