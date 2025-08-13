@@ -19,7 +19,7 @@ Automação simples e funcional para envio de boletins escolares via e-mail, com
 ```
 automacao-escolar-python/
 ├── planilha/   
-├── analise_dados/
+├── analise_dados_pandas/
 │ └── dataset/             # Arquivo com os dados dos alunos
 │ └── scripts/
 │   └── config             # Arquivo com os códigos de analise de dados
