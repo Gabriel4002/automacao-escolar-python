@@ -1,9 +1,13 @@
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
 from datetime import datetime
 from config.config import *
 
+#Função que registra erros em um log
 def registrar_erro(mensagem):
     log_dir = os.path.join( '..', DIRETORIO_LOGS)
     os.makedirs(log_dir, exist_ok=True)
@@ -12,7 +16,7 @@ def registrar_erro(mensagem):
     with open(log_path, 'a', encoding='utf-8') as f:
         f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - {mensagem}\n")
 
-
+#Carrega os dados do arquivo csv gerado após converter a planilha em csv
 def carregar_dados(caminho):
     try:
         df = pd.read_csv(caminho)
@@ -30,7 +34,7 @@ def carregar_dados(caminho):
         registrar_erro(msg)
         return None, msg
 
-
+#Função que valida os dados presentes no arquivo csv, se há algum campo vazio, etc.
 def validar_dados(df):
     erros = []
 
@@ -52,6 +56,7 @@ def validar_dados(df):
         registrar_erro(msg)
         raise ValueError(msg)
 
+#Função que cacula as medias dos alunos além de analisar se há algum erro como se há alguma string onde deveria haver numeros, se todas as colunas estão presentes, etc.
 def calcular_medias(df):
     # Verifica se as colunas necessárias existem
     missing_cols = [col for col in COLUNAS_NOTA if col not in df.columns]
@@ -75,9 +80,9 @@ def calcular_medias(df):
     df['Situação'] = df['Média'].apply(lambda x: 'Aprovado' if x >= MEDIA_APROVACAO else 'Reprovado')
     return df, "Médias calculadas com sucesso"
 
-
+#Função que gera os graficos sobre a quantidade de alunos aprovados e um que exibe a média dos alunos
 def gerar_visualizacoes(df, output_dir):
-    """Gera gráficos profissionais"""
+    """Gera gráficos"""
     try:
         # Gráfico de distribuição
         plt.figure(figsize=(10, 6))
@@ -106,7 +111,7 @@ def gerar_visualizacoes(df, output_dir):
     except Exception as e:
         registrar_erro(f"Erro na geração de gráficos: {str(e)}")
 
-
+#Função que determina onde os resultados serão exportados ao fim do código, onde o arquivo csv com as analises serão salvos
 def exportar_resultados(df, output_path):
     try:
         df.to_csv(output_path, index=False, encoding='utf-8-sig')
@@ -115,6 +120,89 @@ def exportar_resultados(df, output_path):
         msg = f"Erro ao exportar resultados: {str(e)}"
         registrar_erro(msg)
         return msg
+
+#Função que gera um pdf com o relatório dos alunos, médias, situação, nomes
+def gerar_relatorio_pdf(df, output_path, graficos_paths=[]):
+    """Gera um relatório PDF com base nos dados"""
+    try:
+        c = canvas.Canvas(output_path, pagesize=A4)
+        largura, altura = A4
+
+        # Cabeçalho
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(50, altura - 50, "Relatório de Desempenho dos Alunos")
+        c.setFont("Helvetica", 12)
+        c.drawString(50, altura - 70, f"Data de geração: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+        c.setFont("Helvetica-Bold", 10)
+        c.drawString(50, altura - 82, f"Você pode ver os gráficos na segunda página")
+        c.setFont("Helvetica", 12)
+
+
+        # Estatísticas
+        total_alunos = len(df)
+        aprovados = df['Situação'].value_counts().get('Aprovado', 0)
+        reprovados = df['Situação'].value_counts().get('Reprovado', 0)
+
+        c.drawString(50, altura - 100, f"Total de alunos: {total_alunos}")
+        c.drawString(50, altura - 120, f"Aprovados: {aprovados}")
+        c.drawString(50, altura - 140, f"Reprovados: {reprovados}")
+
+
+        # Tabela simples
+        y = altura - 180
+        c.setFont("Helvetica-Bold", 10)
+        c.drawString(50, y, "Nome")
+        c.drawString(250, y, "Média")
+        c.drawString(350, y, "Situação")
+        c.setFont("Helvetica", 10)
+
+        y -= 20
+        for _, row in df.iterrows():
+            c.drawString(50, y, str(row['Nome']))
+            c.drawString(250, y, f"{row['Média']:.2f}")
+            c.drawString(350, y, row['Situação'])
+            y -= 15
+            if y < 50:  # quebra de página
+                c.showPage()
+                y = altura - 50
+
+
+        if graficos_paths:
+            c.showPage()  # inicia nova página para os gráficos
+            c.setFont("Helvetica-Bold", 16)
+            c.drawString(50, altura - 50, "Gráficos de Análise")
+
+            y_position = altura - 100
+
+            for grafico in graficos_paths:
+                if os.path.exists(grafico):
+                    img_width, img_height = ImageReader(grafico).getSize()
+
+                    # Ajusta a largura para no máximo 500px e altura proporcional
+                    max_width = 500
+                    max_height = 350
+                    scale = min(max_width / img_width, max_height / img_height)
+
+                    new_width = img_width * scale
+                    new_height = img_height * scale
+
+                    # Desenha imagem centralizada
+                    x_position = (largura - new_width) / 2
+                    c.drawImage(grafico, x_position, y_position - new_height, width=new_width, height=new_height)
+
+                    y_position -= new_height + 30  # espaçamento
+
+                    # Se não couber mais na página, cria nova
+                    if y_position < 100:
+                        c.showPage()
+                        y_position = altura - 100
+
+        # Salva o PDF
+        c.save()
+        print(f"✅ Relatório PDF gerado em: {output_path}")
+
+    except Exception as e:
+        print(f"❌ Erro ao gerar PDF: {e}")
 
 
 '''def gerar_feedback_ia(nome: str, notas: dict, media: float) -> str:
@@ -216,6 +304,16 @@ def main():
 
         output_path = os.path.join(output_dir, 'analise_completa.csv')
         print("\n" + exportar_resultados(df, output_path))
+
+        resposta = input("Você deseja gerar um PDF com o relatório dos alunos? (Sim/Não): ").strip().lower()
+        if resposta == 'sim' or resposta == 'Sim' or resposta == 's' or resposta == 'S':
+            caminho_pdf = os.path.join(output_dir, 'relatorio_alunos.pdf')
+            graficos = [
+                os.path.join(output_dir, 'distribuicao.png'),
+                os.path.join(output_dir, 'desempenho.png')
+            ]
+            gerar_relatorio_pdf(df, caminho_pdf, graficos_paths=graficos)
+
     except Exception as e:
         print(f"\n❌ Erro: {str(e)}")
         registrar_erro(f"Falha crítica: {str(e)}")
