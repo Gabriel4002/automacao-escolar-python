@@ -100,7 +100,7 @@ python Scripts/codigo_email.py
 
 ## 👣 Próximos Passos
 
-Este projeto é **a evolução de um trabalho anterior:**[projeto-automacao-email](https://github.com/Gabriel4002/projeto-automacao-email) e será futuramente adaptado para **uma aplicação web com Django**
+Este projeto é **a evolução de um trabalho anterior: **[projeto-automacao-email](https://github.com/Gabriel4002/projeto-automacao-email) e será futuramente adaptado para **uma aplicação web com Django**
 
 
 ## 📌 Requisitos
