@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualização%20de%20Dados-orange)
-[![ReportLab](https://img.shields.io/badge/ReportLab-Visualização%20de%20Dados-orange)](https://img.shields.io/badge/ReportLab-Geração%20de%20PDFs-blueviolet)
+![ReportLab](https://img.shields.io/badge/ReportLab-Geração%20de%20PDFs-blueviolet)
 ![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 
 ## 📌 Sobre o Projeto
