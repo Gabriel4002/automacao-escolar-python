@@ -1,19 +1,38 @@
+markdown
 # 📨 Automação Escolar com Python
 
-Automação simples e funcional para envio de boletins escolares via e-mail, com geração, conversão e análise de planilhas usando Python.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualização%20de%20Dados-orange)
+![Status](https://img.shields.io/badge/Status-Concluído-brightgreen)
 
-## 🔧 Funcionalidades
-- Geração de planilha com dados fictícios de alunos (`.xlsx`)
-- Leitura de planilhas existentes
-- Conversão automática para `.csv` e organização na pasta `dataset`
-- Envio de e-mails com os boletins individuais e feedback de notas
-- Registro de logs de envio
+## 📌 Sobre o Projeto
+Este projeto foi desenvolvido com o objetivo de **automatizar o processamento de dados escolares** a partir de planilhas Excel/CSV, gerando:
+- Cálculo automático das médias dos alunos
+- Classificação em **Aprovado** ou **Reprovado**
+- Relatórios em formato CSV
+- Gráficos visuais para melhor análise dos resultados
+- Exportação de relatório em PDF contendo textos e gráficos
+
+## 🚀 Funcionalidades
+- **Leitura de planilhas** (`.csv` ou `.xlsx`)
+- **Processamento automático** de notas
+- **Geração de gráficos** de desempenho e aprovação
+- **Exportação** dos resultados processados
+- **Registro de erros** em arquivo de log
 
 ## 📊 Análise de Dados  
 - Gera estatísticas descritivas (média, desvio padrão).  
 - Classifica alunos em **Aprovados/Reprovados**.  
 - Exporta resultados para `notas_analise.csv`.  
-- **Técnicas usadas**: Pandas, lambda functions, filtros.  
+- **Técnicas usadas**: Pandas, lambda functions, filtros.
+
+## 🛠 Tecnologias Utilizadas
+- [Python](https://www.python.org/)  
+- [Pandas](https://pandas.pydata.org/)  
+- [Matplotlib](https://matplotlib.org/)  
+- [OpenPyXL](https://openpyxl.readthedocs.io/)
+- [ReportLab](https://docs.reportlab.com/)
 
 ## 📁 Estrutura do Projeto
 ```
@@ -21,14 +40,17 @@ automacao-escolar-python/
 ├── planilha/   
 ├── analise_dados_pandas/
 │ └── dataset/             # Arquivo com os dados dos alunos
+│ └── analises/
 │ └── scripts/
-│   └── config             # Arquivo com os códigos de analise de dados
+│   └── config/             # Arquivo com os códigos de analise de dados
 ├── logs/                  # Logs de envio
 ├── Scripts/
-│   └── config              # Scripts principais
+│   └── config/              # Scripts principais
 ├── README.md              # Este arquivo
 ├── requirements.txt       # Bibliotecas necessárias
-└── .gitignore             # Ignorar arquivos temporários
+├── .gitignore             # Ignorar arquivos temporários
+├── .env.example
+└── exemplos-aprendizado   #Ignorar arquivos que utilizei durante parte do aprendizado de Python
 ```
 
 ## ▶️ Como executar
@@ -76,19 +98,16 @@ python analise_dados_pandas/scripts/analise_dados.py
 python Scripts/codigo_email.py
 ```
 
-## 💼 Tecnologias utilizadas
+## 👣 Próximos Passos
 
-- Python 3.13+
-- `pandas`
-- `openpyxl`
-- `smtplib` e `email`
-- `os`, `datetime`
+Este projeto é **a evolução de um trabalho anterior:**[projeto-automacao-email](https://github.com/Gabriel4002/projeto-automacao-email) e será futuramente adaptado para **uma aplicação web com Django**
+
 
 ## 📌 Requisitos
 
 - Conta de e-mail (Gmail, Outlook, etc.)
-- Planilha `.xlsx` formatada corretamente
 - Caso use Gmail, ative a autenticação em dois fatores e gere uma senha de app.
+- É de extrema importância antes de executar os código fazer o download do 'requirements.txt'
 
 ## ✍️ Autor
 
