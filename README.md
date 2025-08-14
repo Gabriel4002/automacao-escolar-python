@@ -82,6 +82,7 @@ EMAIL=seuemail@gmail.com
 SENHA=sua_senha_de_app
 ```
 > ⚠️ Importante: use senha de aplicativo no Gmail ou configuração equivalente em outros provedores.
+Após isso, va até o arquivo `gerar_planilha.py` presente em `automacao-escolar-python/Scripts` e no dicionário `data` altere um dos e-mails para algum que seja de seu uso para vizualizar como o e-mail é formatado
 
 5. Execute os scripts:
 ```bash
